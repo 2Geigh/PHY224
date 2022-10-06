@@ -1,6 +1,7 @@
 #RADIOACTIVE DECAY
 #NICHOLAS GARCIA AND MARTA GONCZAR
 #2022 / 9 / 29
+#hello
 
 from numpy import exp
 import numpy as np
