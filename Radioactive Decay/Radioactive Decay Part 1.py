@@ -1,7 +1,7 @@
 #RADIOACTIVE DECAY
 #NICHOLAS GARCIA AND MARTA GONCZAR
 #2022 / 9 / 29
-#hello
+
 
 from numpy import exp
 import numpy as np
@@ -82,7 +82,7 @@ pl.show();
 pl.figure(2)
 pl.cla()
 pl.plot(t, log(sampleRate), ".")
-pl.errorbar(t, log(sampleRate), yerr=uSampleRate, fmt=" ")
+pl.errorbar(t, log(sampleRate), yerr=uSampleRate/sampleRate, fmt=" ")
 pl.plot(t, I_lin(t))
 pl.plot(t, I_lin_theoretical(t))
 pl.xlabel("Time (s)")
