@@ -10,6 +10,7 @@ from scipy.optimize import curve_fit
 import scipy.optimize as so
 import matplotlib.pyplot as pl
 from numpy import log
+from math import log10 , floor
 
 machineData = np.loadtxt("Barium.txt", delimiter="\t");
 dt = 20 #seconds
@@ -53,6 +54,16 @@ poptNonLin, pcovNonLin = so.curve_fit(model_I_nonlin, t, sampleRate)
 linHalfLife = (abs(poptLin[1]))**(-1);
 nonLinHalfLife = poptNonLin[1];
 theoreticalHalfLife = 2.6 * 60;
+
+from math import log10 , floor
+def round_it(x, sig):
+    return round(x, sig-int(floor(log10(abs(x))))-1)
+
+uLinHalfLife = (pcovLin[1,1])**(1/2)
+uLinHalfLife = round_it(uLinHalfLife, 1)
+uNonLinHalfLife = (pcovNonLin[1,1])**(1/2)
+uNonLinHalfLife = uNonLinHalfLife / (nonLinHalfLife**2)
+uNonLinHalfLife = round_it(uNonLinHalfLife, 1)
 
 def I_nonlin(x):
     return poptNonLin[0] * ((1/2)**(x/poptNonLin[1]))
@@ -116,30 +127,48 @@ print("#####################################")
 print("#####################################")
 print("#####################################")
 print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("_________________________")
 print("The expected half-life is 2.6 minutes, or 160 seconds.")
-print("The linear regression method predicts the half-life to be ", linHalfLife, "seconds.");
-print("The non-linear regression method predicts the half-life to be ", nonLinHalfLife, "seconds.");
-print("#####################################")
-print("The difference between the expected and linearly-regressed half-life is ", abs(linHalfLife-(2.6*60)),"seconds.")
-print("The difference between the expected and nonlinearly-regressed half-life is ", abs(nonLinHalfLife-(2.6*60)), "seconds.")
-print("#####################################")
-print("#####################################")
+print("The linear regression method predicts the half-life to be ", linHalfLife, "+- ",uLinHalfLife," seconds.");
+print("The non-linear regression method predicts the half-life to be ", nonLinHalfLife, "+- ",uNonLinHalfLife, " seconds.");
+print("_________________________")
+print("The difference between the expected and linearly-regressed half-life is ", abs(linHalfLife-(2.6*60))," +- ",((uLinHalfLife**2))**(1/2),"seconds.")
+print("The difference between the expected and non-linearly-regressed half-life is ", abs(nonLinHalfLife-(2.6*60))," +- ",((uNonLinHalfLife**2))**(1/2), "seconds.")
+print("_________________________")
 
 #Error in lon-linear fit is smaller, so that's what we'll calculate chi-squared for
 
-sigma_nonLinHalfLife = pcovNonLin[1,1];
+"""sigma_nonLinHalfLife = pcovNonLin[1,1];
 uHalfLife = (sigma_nonLinHalfLife)**(1/2)
-print("The uncertainty of the half-life calculated using the non-linear regression model is ", uHalfLife, "seconds.")
+print("The uncertainty of the half-life calculated using the non-linear regression model is ", uHalfLife, "seconds.")"""
 
 #Computing Chi-Squared
-
 X2 = 0
 i = 0
 while i < len(t):
-    X2 = X2 + (((sampleRate[i]-I_nonlin(t[i]))/uHalfLife)**2)
+    if i == 52:
+        i = 53;
+    X2 = X2 + (((sampleRate[i]-I_nonlin(t[i]))/uSampleRate[i])**2)
     i = i + 1
 parameters = 2 #the number of parameters in nu = N - n
 X2 = X2 / ((len(sampleCount))-parameters)
-print("Chi-Squared is ",X2)
+
+
+print("Chi-Squared is ",X2," for the Non-Linear Regression Model.")
 if X2 < 1:
     print("Thus, this model is over-fit.\n")
+if X2 > 10:
+    print("Thus, the model is a poor fit.\n")
+
+if X2 > 1 and X2 < 5:
+    print("Thus, the model is an incomplete fit.\n")
