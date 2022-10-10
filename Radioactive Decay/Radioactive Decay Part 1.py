@@ -68,30 +68,52 @@ def I_lin_theoretical(x):
 
 pl.cla()
 pl.figure(1)
+pl.subplot(2, 1, 2)
 pl.plot(t, sampleRate, ".")
 pl.plot(t, I_nonlin(t))
 pl.plot(t, I_nonlin_theoretical(t))
 pl.xlabel("Time (s)")
-pl.ylabel("Decay rate (1/s)")
+pl.ylabel("Decay Rate (1/s)")
 pl.errorbar(t, sampleRate, yerr=uSampleRate, fmt=" ")
 pl.legend(['Measured values with uncertainty','Prediction from Regression', 'Theoretical Curve'])
+
+pl.subplot(2, 1, 1)
+pl.plot(t, sampleRate-I_nonlin_theoretical(t), ".")
+pl.errorbar(t, sampleRate-I_nonlin_theoretical(t), yerr=uSampleRate, fmt=" ")
+pl.ylabel("Residue")
+
 pl.savefig("Decay Rate over Time with Uncertainty and Non-Linear Fit",dpi=300,bbox_inches="tight")
 pl.tight_layout();
 pl.show();
 
 pl.figure(2)
 pl.cla()
+pl.subplot(2, 1, 2)
 pl.plot(t, log(sampleRate), ".")
 pl.errorbar(t, log(sampleRate), yerr=uSampleRate/sampleRate, fmt=" ")
 pl.plot(t, I_lin(t))
 pl.plot(t, I_lin_theoretical(t))
-pl.xlabel("Time (s)")
+pl.xlabel("Log of Time (s)")
 pl.ylabel("Log of Decay Rate (1/s)")
 pl.legend(['Measured values with uncertainty','Prediction from Regression', 'Theoretical Curve'])
+
+pl.subplot(2, 1, 1)
+pl.plot(t, (log(sampleRate))-I_lin_theoretical(t), ".")
+pl.errorbar(t, (log(sampleRate))-I_lin_theoretical(t), yerr=uSampleRate/sampleRate, fmt=" ")
+pl.ylabel("Residue")
+
 pl.savefig("Decay Rate over Time with Uncertainty and Linear Fit",dpi=300,bbox_inches="tight")
 pl.tight_layout();
 pl.show();
 
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
+print("#####################################")
 print("#####################################")
 print("#####################################")
 print("The expected half-life is 2.6 minutes, or 160 seconds.")
