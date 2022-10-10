@@ -67,6 +67,42 @@ pl.savefig("Histogram of Fiesta Plate Sample Count",dpi=300,bbox_inches="tight")
 pl.tight_layout();
 pl.show();
 
+
+#########################
+#########################
+#########################
+#########################
+#########################
+#########################
+#########################
+#########################
+#########################
+#########################
+
+m = backgroundMean
+poissonArray = []
+x = np.arange(10)
+for i in x:
+    poissonArray.append(Poisson(i,m))
+
+gaussianMean = m
+gaussianStdv = m**(1/2)
+
+def Gaussian(A):
+    return (1/(gaussianStdv*(sqrt(2*pi))))*(e**(-0.5*(((A-gaussianMean)/gaussianStdv)**2)))
+
+pl.cla()
+pl.hist(backgroundCount, bins=10, density=(True))
+pl.plot(x, poissonArray)
+pl.plot(x, Gaussian(x))
+pl.ylabel("Frequency")
+pl.xlabel("Sample Count")
+pl.legend(["Poisson probability mass function","Gaussian distribution"])
+
+pl.savefig("Histogram of Background Sample Count",dpi=300,bbox_inches="tight")
+pl.tight_layout();
+pl.show();
+
 """
 handle=open("Barium.txt")
 handle2=open("Background.txt")
