@@ -10,6 +10,9 @@ import scipy.stats as ss
 from scipy.stats import poisson
 from scipy.stats import norm
 import matplotlib.pyplot as pl
+from numpy import e
+from numpy import pi
+from numpy import sqrt
 
 machineData = np.loadtxt("Fiesta.txt", delimiter="\t");
 dt = 3 #seconds
@@ -41,15 +44,27 @@ m = sampleCountMean
 
 def Poisson(n,M):
     return ((np.e)**(-M))*(M**n)/(np.math.factorial(n))
-poisson = []
+poissonArray = []
 x = np.arange(80)
 for i in x:
-    poisson.append(Poisson(i,m))
+    poissonArray.append(Poisson(i,m))
+    
+gaussianMean = m
+gaussianStdv = m**(1/2)
 
+def Gaussian(A):
+    return (1/(gaussianStdv*(sqrt(2*pi))))*(e**(-0.5*(((A-gaussianMean)/gaussianStdv)**2)))
+    
+pl.cla()
 pl.hist(sampleCount, bins="auto", density=(True))
-pl.plot(x, poisson)
+pl.plot(x, poissonArray)
+pl.plot(x, Gaussian(x))
 pl.ylabel("Frequency")
 pl.xlabel("Sample Count")
+pl.legend(["Poisson probability mass function","Gaussian distribution"])
+
+pl.savefig("Histogram of Fiesta Plate Sample Count",dpi=300,bbox_inches="tight")
+pl.tight_layout();
 pl.show();
 
 """
