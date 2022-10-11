@@ -30,7 +30,7 @@ uBackgroundMean = np.std(backgroundCount) / ((len(backgroundSample))**(1/2))
 sampleCount = totalCount - backgroundMean;
 uSampleCount = (((uTotalCount)**2)+((uBackgroundMean)**2))**(1/2)
 sampleRate = sampleCount / dt
-uSampleRate = ((sampleCount)**(1/2))/dt
+uSampleRate = ((abs(sampleCount))**(1/2))/dt
 
 #Instructions say Barium has half-life of 2.6 minutes
 
