@@ -1,0 +1,20 @@
+Physical model used has to be correct
+
+Put residuals as a subplot of the main figure showing the fit
+Fig. 4, 6, 7 -- difference between them?
+
+Prefer single-commumn and single-spaced
+Only use math input for equations, not numbers
+	Equations must be labelled with a number
+Captions should report:
+	Fit function
+	Best fit parameters + their uncertainties
+	Chi-squared
+
+Report uncertainty of best-fit parameters
+Results should be reported only to the precision of your uncertainty
+Show proper error propagation
+
+How did you record your uncertainties?
+Methodology for both parts of activity should be one section
+Refer to fig. 1 in your method description
