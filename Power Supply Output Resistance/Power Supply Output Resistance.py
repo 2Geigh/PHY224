@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-OCV1, uOCV1, R1, uR1, TV1, uTV1, I1, uI1, OCV2, uOCV2, R2, uR2, TV2, uTV2, I2, uI2 = np.loadtxt("PSdata2.csv", delimiter=",", unpack=True)
+Battery_OpenCircuitVoltage, uBattery_OpenCircuitVoltage, Battery_Resistance, uBattery_Resistance, Battery_TerminalVoltage, uBattery_TerminalVoltage, Battery_Current, uBattery_Current = np.loadtxt("BATTERYdata.csv", delimiter=",", unpack=True)
+DCSupply_OpenCircuitVoltage, uDCSupply_OpenCircuitVoltage, DCSupply_Resistance, DCSupply_Resistance, DCSupply_TerminalVoltage, uDCSupply_TerminalVoltage, DCSupply_Current, uDCSupply_Current = np.loadtxt("BATTERYdata.csv", delimiter=",", unpack=True)
 #part 1
 #(a)Plot V vs I and use the data to determine the output resistance of the battery Rb.
 plt.plot(TV1,I1, marker="o",linestyle="None")
