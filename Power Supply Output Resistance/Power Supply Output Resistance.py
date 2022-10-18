@@ -10,3 +10,6 @@ plt.title("The Position Of A Rocket over Time")
 #(b) Estimate all uncertainties.
 
 plt.errorbar(time, position, yerr=up,fmt="o",ecolor="blue")
+
+
+#wefsgtsdgdgfs
