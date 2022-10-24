@@ -20,6 +20,7 @@ plt.xlabel("Current (I)")
 plt.title("Battery Terminal voltage vs. Current")
 #(b) Estimate all uncertainties.
 plt.errorbar(Battery_Current,Battery_TerminalVoltage, xerr=uBattery_Current,yerr=uBattery_TerminalVoltage,fmt="o",ecolor="blue")
+plt.savefig("1-BatteryTerminal-VxI");
 plt.show()
 #part2
 #(b) Plot voltage V as a function of current I, calculate the output resistance of
@@ -31,6 +32,7 @@ plt.xlabel("Current (I)")
 plt.title("Battery Terminal voltage vs. Current")
 #(c) Estimate all uncertainties.
 plt.errorbar(DCSupply_Current,DCSupply_TerminalVoltage, xerr=uDCSupply_Current, yerr=uDCSupply_TerminalVoltage,fmt="o",ecolor="blue")
+plt.savefig("2-BatteryTerminal-VxI");
 plt.show()
 #plot 6.5
 plt.plot(V65_Current,V65_TerminalVoltage, marker="o",linestyle="-")
@@ -38,6 +40,7 @@ plt.ylabel("Battery Terminal Voltage (V)")
 plt.xlabel("Current (I)")
 plt.title("Battery Terminal voltage 6.5V vs. Current")
 plt.errorbar(V65_Current,V65_TerminalVoltage, xerr=u65V_Current, yerr=u65V_TerminalVoltage,fmt="o",ecolor="blue")
+plt.savefig("6,5V-BatteryTerminal-VxI");
 plt.show()
 #plot 10
 plt.plot(V10_Current,V10_TerminalVoltage, marker="o",linestyle="-")
@@ -45,6 +48,7 @@ plt.ylabel("Battery Terminal Voltage (V)")
 plt.xlabel("Current (I)")
 plt.title("Battery Terminal voltage 10V vs. Current")
 plt.errorbar(V10_Current,V10_TerminalVoltage, xerr=u10V_Current, yerr=u10V_TerminalVoltage,fmt="o",ecolor="blue")
+plt.savefig("10V-BatteryTerminal-VxI");
 plt.show()
 # PLOT 15
 plt.plot(V15_Current,V15_TerminalVoltage, marker="o",linestyle="-")
@@ -52,6 +56,7 @@ plt.ylabel("Battery Terminal Voltage (V)")
 plt.xlabel("Current (I)")
 plt.title("Battery Terminal voltage 15V vs. Current")
 plt.errorbar(V15_Current,V15_TerminalVoltage, xerr=u15V_Current, yerr=u15V_TerminalVoltage,fmt="o",ecolor="blue")
+plt.savefig("15V-BatteryTerminal-VxI");
 plt.show()
 #PLOT 20
 plt.plot(V20_Current,V20_TerminalVoltage, marker="o",linestyle="-")
@@ -59,5 +64,6 @@ plt.ylabel("Battery Terminal Voltage (V)")
 plt.xlabel("Current (I)")
 plt.title("Battery Terminal voltage 20V vs. Current")
 plt.errorbar(V20_Current,V20_TerminalVoltage, xerr=u20V_Current, yerr=u20V_TerminalVoltage,fmt="o",ecolor="blue")
+plt.savefig("20V-BatteryTerminal-VxI");
 plt.show()
 
