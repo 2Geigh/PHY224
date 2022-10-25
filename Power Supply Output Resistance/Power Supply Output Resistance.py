@@ -99,3 +99,4 @@ plt.ylabel("Output resitance (ohms)")
 plt.title("Battery Resitance Vs Output Resistance")
 plt.errorbar(DCSupply_Resistance, output_res2, xerr=uDCSupply_Resistance, yerr=uoutput_res2,fmt="o",ecolor="blue")
 plt.show()
+#######
