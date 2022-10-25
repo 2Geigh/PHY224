@@ -68,7 +68,7 @@ plt.savefig("20V-BatteryTerminal-VxI");
 plt.show()
 
 output_resitance=[0.676, 1.092, 1.704,7.619]
-uoutput_resitance=[0.180, 0.395, 0.900, 8.594]
+uoutput_resitance=[0.17, 0.36, 0.78, 6.15]
 plt.plot(Battery_Resistance, output_resitance,marker="o",linestyle="-")
 plt.xlabel("Battery Resistance (ohms)")
 plt.ylabel("Output resitance (ohms)")
@@ -77,26 +77,25 @@ plt.errorbar(Battery_Resistance, output_resitance, xerr=uBattery_Resistance, yer
 plt.show()
 
 output_res2=[0.0955261901, 1.835168502, 1.794430089,1.661129568,1.83286735,1.822521154, 1.819623944, 1.888319396,1.844660194,1.8287373,1.838006231,1.798237727,1.848563969,1.832061069,1.799065421, 1.618122977]
-uoutput_res2=[0.1674060868,
-0.3561981456,
-0.7628640184,
-4.397863986,
-0.1486708436,
-0.3084644404,
-0.6601726868,
-3.804940914,
-0.1351749862,
-0.2798466889,
-0.5975514116,
-3.435697156,
-0.1285870924,
-0.2654809493,
-0.5655713381,
-3.249717658]
+uoutput_res2=[0.167139204,0.3495309685,
+0.7529019955,
+4.360213809,
+0.1441300205,
+0.3028944476,
+0.6523361729,
+3.7758079,
+0.1309176374,
+0.2749073124,
+0.5910486334,
+3.415989566,
+0.1244775061,
+0.2608595657,
+0.5599005086,
+3.23560266]
 plt.plot(DCSupply_Resistance, output_res2,marker="o",linestyle="none")
-plt.xlabel("Battery Resistance (ohms)")
+plt.xlabel("DC Power Supply Resistance (ohms)")
 plt.ylabel("Output resitance (ohms)")
-plt.title("Battery Resitance Vs Output Resistance")
+plt.title("DC Power Supply Resitance Vs Output Resistance")
 plt.errorbar(DCSupply_Resistance, output_res2, xerr=uDCSupply_Resistance, yerr=uoutput_res2,fmt="o",ecolor="blue")
 plt.show()
 #######
