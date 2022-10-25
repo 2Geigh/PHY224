@@ -26,6 +26,7 @@ plt.show()
 #(b) Plot voltage V as a function of current I, calculate the output resistance of
 # thepower supply Rps
 
+plt.subplot()
 plt.plot(DCSupply_Current,DCSupply_TerminalVoltage, marker="o",linestyle="None")
 plt.ylabel("DC Power SUpply Voltage (V)")
 plt.xlabel("Current (mA)")
@@ -35,36 +36,41 @@ plt.errorbar(DCSupply_Current,DCSupply_TerminalVoltage, xerr=uDCSupply_Current, 
 plt.savefig("2-BatteryTerminal-VxI");
 plt.show()
 #plot 6.5
+plt.figure(1)
+plt.subplot(2,2,1)
 plt.plot(V65_Current,V65_TerminalVoltage, marker="o",linestyle="-")
-plt.ylabel("DC Power SUpply Voltage (V)")
+plt.ylabel("Voltage (V)")
 plt.xlabel("Current (mA)")
-plt.title("DC Power SUpply Voltage 6.5V vs. Current")
+plt.title("6.5V")
 plt.errorbar(V65_Current,V65_TerminalVoltage, xerr=u65V_Current, yerr=u65V_TerminalVoltage,fmt="o",ecolor="blue")
-plt.savefig("6,5V-BatteryTerminal-VxI");
-plt.show()
+#plt.savefig("6,5V-BatteryTerminal-VxI");
+#plt.show()
 #plot 10
+plt.subplot(2,2,2)
 plt.plot(V10_Current,V10_TerminalVoltage, marker="o",linestyle="-")
-plt.ylabel("DC Power SUpply Voltage (V)")
 plt.xlabel("Current (mA)")
-plt.title("DC Power SUpply Voltage 10V vs. Current")
+plt.title("10V")
 plt.errorbar(V10_Current,V10_TerminalVoltage, xerr=u10V_Current, yerr=u10V_TerminalVoltage,fmt="o",ecolor="blue")
-plt.savefig("10V-BatteryTerminal-VxI");
-plt.show()
+#plt.savefig("10V-BatteryTerminal-VxI");
+#plt.show()
 # PLOT 15
+plt.subplot(2,2,3)
 plt.plot(V15_Current,V15_TerminalVoltage, marker="o",linestyle="-")
-plt.ylabel("DC Power SUpply Voltage (V)")
+plt.ylabel("Voltage (V)")
 plt.xlabel("Current (mA)")
-plt.title("DC Power SUpply Voltage 15V vs. Current")
+plt.title("15V")
 plt.errorbar(V15_Current,V15_TerminalVoltage, xerr=u15V_Current, yerr=u15V_TerminalVoltage,fmt="o",ecolor="blue")
-plt.savefig("15V-BatteryTerminal-VxI");
-plt.show()
+#plt.savefig("15V-BatteryTerminal-VxI");
+#plt.show()
 #PLOT 20
+plt.subplot(2,2,4)
 plt.plot(V20_Current,V20_TerminalVoltage, marker="o",linestyle="-")
-plt.ylabel("DC Power SUpply Voltage (V)")
+#plt.ylabel("DC Power Supply Voltage (V)")
 plt.xlabel("Current (mA)")
-plt.title("DC Power SUpply Voltage 20V vs. Current")
+plt.title("20V")
 plt.errorbar(V20_Current,V20_TerminalVoltage, xerr=u20V_Current, yerr=u20V_TerminalVoltage,fmt="o",ecolor="blue")
-plt.savefig("20V-BatteryTerminal-VxI");
+plt.tight_layout(h_pad=2);
+plt.savefig("20V-BatteryTerminal-VxI",dpi=300,bbox_inches="tight");
 plt.show()
 
 output_resitance=[0.676, 1.092, 1.704,7.619]
