@@ -277,14 +277,15 @@ for i in np.arange(0,12000,1):
     
 def gammaModel(t, gamma):
     return Amplitudes[0]*np.exp(t * -gamma)
-poptLin, pcovLin = so.curve_fit(gammaModel,dampedXt,Amplitudes)
+poptLin, pcovLin = so.curve_fit(gammaModel,dampedXt[0:11900],Amplitudes[0:11900])
 
 pl.cla()
 #pl.plot(dampedXt,dampedX, ".")
-pl.plot(dampedXt[0:11900],Amplitudes[0:11900]) #0.26625
+pl.plot(dampedXt[0:11900],Amplitudes[0:11900], ".") #0.26625
 pl.plot(dampedXt,gammaModel(dampedXt,poptLin[0]))
 pl.xlabel("Time (s)")
 pl.ylabel("Distance (m)")
-pl.savefig("GAMMA DUMMY")
+pl.legend(["Measured Amplitude of Oscillation","Regression Fit"])
+pl.savefig("Session 2 - Amplitude of Oscillation with Fit")
 
-print("Gamma coefficient is ", poptLin[0])
+print("Gamma coefficient is ", poptLin[0], "+- ", pcovLin[0][0])
