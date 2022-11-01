@@ -125,6 +125,7 @@ print("Spring constant is ",round(bareK,0)," +- ",uBareK, " kg/s/s")
 #________________________________________________________
 
 dampedXt, dampedX, uDampedX = np.loadtxt("dampedx.txt", unpack=True)
+dampedVt, dampedV = np.loadtxt("dampedv.txt", unpack=True)
 
 udampedXt = 0.005
 dampedMass = 217.6 #g
@@ -137,6 +138,16 @@ dampedOmega0 = (2*np.pi)/dampedPeriod #1/s
 uDampedOmega0 = round_it((2 * np.pi * uDampedFrequency),1)
 dampedK = (dampedOmega0**2)*dampedMass
 uDampedK = round_it(((2**(1/2))*dampedOmega0*uDampedOmega0),1)
+
+dampedV = dampedV / 100 #converting to m/s
+uDampedV = 0.0005 / 100
+
+reynoldV = np.sqrt(np.mean(dampedV[1:]**2))
+
+for i in np.arange(0,len(dampedV),1):
+    if abs(dampedV[i]) > 100:
+        dampedV[i] = 0
+
 
 #Using Forward Euler Method to get Plottable Data
 dampedY = zeros(len(dampedXt/dt))
@@ -222,6 +233,12 @@ def find_Amplitude(index,position_array):
     A = net_displacement / 2
     return A;
 
+def find_uAmplitude(index,position_array):
+    """Finds the uncertainty of the amplitude of a sinusoidal function based on extrema on a given time interval"""
+    uA = np.sqrt(((uDampedX[index]/max(position_array[index:index+150]))**2)+((uDampedX[index]/min(position_array[index:index+150]))**2))
+    uA = uA / 2
+    return uA;
+
 def find_Amplitude_time(index,position_array):
     """Finds the time of an aimpplitude on an interval"""
     peak = abs(max(position_array[index:index+10]))
@@ -275,17 +292,53 @@ Amplitudes = zeros(len(dampedXt))
 for i in np.arange(0,12000,1):
     Amplitudes[i] = find_Amplitude(i,dampedX)
     
+uAmplitudes = zeros(len(dampedXt))
+for i in np.arange(0,12000,1):
+    uAmplitudes[i] = find_uAmplitude(i,dampedX)
+    
 def gammaModel(t, gamma):
     return Amplitudes[0]*np.exp(t * -gamma)
-poptLin, pcovLin = so.curve_fit(gammaModel,dampedXt[0:11900],Amplitudes[0:11900])
+poptLin, pcovLin = so.curve_fit(gammaModel,dampedXt[0:11900],Amplitudes[0:11900], p0=-1)
+
 
 pl.cla()
 #pl.plot(dampedXt,dampedX, ".")
 pl.plot(dampedXt[0:11900],Amplitudes[0:11900], ".") #0.26625
 pl.plot(dampedXt,gammaModel(dampedXt,poptLin[0]))
+pl.errorbar(dampedXt[0:11900], Amplitudes[0:11900], xerr=0.00005, yerr=uAmplitudes[0:11900], fmt=" ")
 pl.xlabel("Time (s)")
 pl.ylabel("Distance (m)")
 pl.legend(["Measured Amplitude of Oscillation","Regression Fit"])
 pl.savefig("Session 2 - Amplitude of Oscillation with Fit")
 
+pl.cla()
+#pl.plot(dampedXt,dampedX, ".")
+#pl.errorbar(dampedXt[0:11900], Amplitudes[0:11900], xerr=0.00005, yerr=(max(uDampedX)*np.sqrt(2)), fmt=" ")
+pl.errorbar(dampedXt[0:11900], Amplitudes[0:11900], xerr=0.00005, yerr=uAmplitudes[0:11900], fmt=" ")
+pl.plot(dampedXt[0:11900],Amplitudes[0:11900], ".") #0.26625
+pl.xlabel("Time (s)")
+pl.ylabel("Amplitude (m)")
+pl.savefig("Session 2 - Amplitude of Oscillation")
+
 print("Gamma coefficient is ", poptLin[0], "+- ", pcovLin[0][0])
+
+#Computing Chi-Squared
+X2 = 0
+i = 0
+while i < len(dampedXt):
+    if i == 52:
+        i = 53;
+    X2 = X2 + (((Amplitudes[i]-gammaModel(dampedXt[i],poptLin[0]))/(uDampedX[i]**np.sqrt(2)))**2)
+    i = i + 1
+parameters = 2 #the number of parameters in nu = N - n
+X2 = X2 / ((len(dampedX))-parameters)
+
+
+print("Chi-Squared is ",X2," for the Non-Linear Regression Model.")
+if X2 < 1:
+    print("Thus, this model is over-fit.\n")
+if X2 > 10:
+    print("Thus, the model is a poor fit.\n")
+
+if X2 > 1 and X2 < 5:
+    print("Thus, the model is an incomplete fit.\n")

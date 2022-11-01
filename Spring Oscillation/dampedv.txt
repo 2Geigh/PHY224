@@ -1,5 +1,3 @@
-Motion Sensor Data File Oct 20, 2022 11:11 AM
-Time (s)	Velocity (cm/s)
 0.000	NaN
 0.010	-38.528
 0.020	-43.688
