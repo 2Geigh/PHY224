@@ -303,9 +303,9 @@ poptLin, pcovLin = so.curve_fit(gammaModel,dampedXt[0:11900],Amplitudes[0:11900]
 
 pl.cla()
 #pl.plot(dampedXt,dampedX, ".")
+pl.errorbar(dampedXt[0:11900], Amplitudes[0:11900], xerr=0.00005, yerr=uAmplitudes[0:11900], fmt=" ")
 pl.plot(dampedXt[0:11900],Amplitudes[0:11900], ".") #0.26625
 pl.plot(dampedXt,gammaModel(dampedXt,poptLin[0]))
-pl.errorbar(dampedXt[0:11900], Amplitudes[0:11900], xerr=0.00005, yerr=uAmplitudes[0:11900], fmt=" ")
 pl.xlabel("Time (s)")
 pl.ylabel("Distance (m)")
 pl.legend(["Measured Amplitude of Oscillation","Regression Fit"])
