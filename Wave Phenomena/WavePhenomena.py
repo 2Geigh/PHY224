@@ -8,18 +8,31 @@ from numpy import tan
 from numpy import pi
 import matplotlib.pyplot as pl
 
+"WAVE SPEED"
+frequency= [5,10,12,15,20]
+avg_wavelength=[4.117,1.9,1.59,1.27,0.972]
+uavg_wavelength=[0.4117,0.19,0.2385,0.1905,0.1458]
+pl.cla()
+pl.plot(frequency,avg_wavelength,".")
+pl.errorbar(frequency,avg_wavelength, yerr=uavg_wavelength, fmt="none");
+pl.xlabel("Frequency (Hz)");
+pl.ylabel("Average Wavelength (cm)")
+pl.savefig("ACTIVITY 2")
+
+
+
+
 "DIFRACTION"
-
 f = 20 #Hz
-
+###################
 slitSeperation = np.array([3.0,1.0,0.50,0.01])
 angularSpread = np.array([34.21,41.72,50.47,58.86])
 uAngularSpread = 15/100 * angularSpread
-
+#################
 a = slitSeperation
 uA = uAngularSpread
 th = angularSpread
-
+################
 pl.cla()
 pl.plot(sin(th),a, ".")
 pl.errorbar(sin(th), a, yerr=uA, fmt=" ")
