@@ -26,11 +26,14 @@ pl.savefig("ACTIVITY 2")
 f = 20 #Hz
 ###################
 slitSeperation = np.array([3.0,1.0,0.50,0.01])
+xslitSeperation=1/slitSeperation
 angularSpread = np.array([34.21,41.72,50.47,58.86])
-uAngularSpread = 0.15 * angularSpread
+angularSpreadwidth= sin(angularSpread)
+uAngularSpread = 0.15 * angularSpreadwidth
+uslitsep=0.1
 ##################
-angularSpread = angularSpread * pi / 180
-uAngularSpread = 10
+#angularSpread = angularSpread * pi / 180
+#uAngularSpread = 10
 #################
 a = slitSeperation
 uA = 0.1 #cm
@@ -38,12 +41,13 @@ th = angularSpread
 uSinth = sin(th)*uAngularSpread * (1/tan(th))
 ################
 pl.cla()
-pl.errorbar(a, sin(th), xerr=uA, yerr=uSinth, fmt=" ")
-pl.plot(a,sin(th), ".")
+pl.errorbar(xslitSeperation, angularSpreadwidth, xerr=uAngularSpread, yerr=uslitsep, fmt=" ")
+pl.plot(xslitSeperation, angularSpreadwidth, ".")
 pl.ylabel("Sin of the Angular Spread")
 pl.xlabel("Slit seperation (cm)")
 pl.savefig("Experiment 4 -- Slit sepration over Sine of Angular Spread");
 
+#difraction 2.0
 
 
 
